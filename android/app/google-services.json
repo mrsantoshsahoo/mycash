@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1068008121988",
+    "project_id": "mycash-88d9f",
+    "storage_bucket": "mycash-88d9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068008121988:android:8ea215b39fd74a094f04d1",
+        "android_client_info": {
+          "package_name": "com.example.mycash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068008121988-5jpv9aslck54jk04tmcp2v9audmpgjao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQS96JGiWr7upukECTPLMApNhw7twQiBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068008121988-5jpv9aslck54jk04tmcp2v9audmpgjao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
