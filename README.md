@@ -1,0 +1,2 @@
+# mycash
+manage your cash
