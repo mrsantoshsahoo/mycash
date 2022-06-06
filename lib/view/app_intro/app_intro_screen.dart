@@ -12,7 +12,6 @@ class SplashScreen extends StatelessWidget {
     Navigator.pushReplacementNamed(context, "/home_main");
     // if (isLoggedIn != null && isLoggedIn) {
     //   Navigator.pushReplacementNamed(context, "/home_main");
-
     // }else{
     //   Navigator.pushReplacementNamed(context, "/signin");
     // }
