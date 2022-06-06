@@ -17,7 +17,7 @@ class AppRouter {
       RouteStrings.DASHBOARD: (context) => DashboardMainScreen(),
       RouteStrings.PROFILE: (context) => ProfileMainScreen(),
    //   RouteStrings.ADD_CASH:(context)=>AddCashScreen(),
-      RouteStrings.SIGNIN:(context)=>SignInScreen(),
+    //  RouteStrings.SIGNIN:(context)=>SignInScreen(),
     };
   }
 }

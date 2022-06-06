@@ -9,12 +9,12 @@ class SplashScreen extends StatelessWidget {
   Future splashNav(context) async {
     final isLoggedIn = await SharedPreferenceHelper.isLoggedIn;
     await Future.delayed(const Duration(seconds: 3));
-
-    if (isLoggedIn != null && isLoggedIn) {
-      Navigator.pushReplacementNamed(context, "/home_main");
-    }else{
-      Navigator.pushReplacementNamed(context, "/signin");
-    }
+    Navigator.pushReplacementNamed(context, "/home_main");
+    // if (isLoggedIn != null && isLoggedIn) {
+    //   Navigator.pushReplacementNamed(context, "/home_main");
+    // }else{
+    //   Navigator.pushReplacementNamed(context, "/signin");
+    // }
 
   }
 
