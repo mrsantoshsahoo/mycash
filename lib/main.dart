@@ -4,6 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:mycash/view/app_intro/app_intro_screen.dart';
 import 'package:mycash/view_model/home_main_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'app_helper/app_local_database_helper/field_constants.dart';
+import 'app_helper/app_local_database_helper/mycash_database.dart';
+import 'app_helper/app_local_database_helper/name_constants.dart';
 import 'app_helper/app_route_helper/app_router.dart';
 import 'app_helper/app_route_helper/app_router_name.dart';
 
@@ -14,6 +18,7 @@ void main() async {
     systemNavigationBarColor: Colors.white,
     statusBarColor: Colors.teal,
   ));
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseApp firebaseApp = await Firebase.initializeApp();

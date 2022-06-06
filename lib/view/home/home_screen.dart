@@ -205,7 +205,7 @@ class HomeScreen extends StatelessWidget {
                     CashManage _data = CashManage();
                     _data.savingTitle = _savingTitle.text;
                     _data.cashInOut?.add(CashInOut(balanceIn: 100));
-                    counter.addSaving(data: _data);
+                    counter.addSaving( _data);
                     _savingTitle.clear();
                     Navigator.pop(context);
                   },

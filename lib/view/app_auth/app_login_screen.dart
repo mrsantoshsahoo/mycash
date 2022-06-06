@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mycash/view/home/home_main_screen.dart';
+import '../../app_helper/app_prefreance/app_preferences.dart';
 import 'firebase_auth.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -32,14 +33,9 @@ class SignInScreen extends StatelessWidget {
       onPressed: () {
         signInWithGoogle().then((result) {
           if (result != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return HomeMainScreen();
-                },
-              ),
-            );
-          }
+            SharedPreferenceHelper.saveBool("islogin", true);
+            Navigator.pushReplacementNamed(context, "/home_main");
+         }
         });
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),

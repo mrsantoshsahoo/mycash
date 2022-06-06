@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../app_helper/app_prefreance/app_preferences.dart';
 import '../../model/home/cash_in_out_model.dart';
+import '../../utils/app_time_converter.dart';
 import '../../utils/extension_helper.dart';
 import '../../utils/widget_style.dart';
 import '../../view_model/home_main_view_model.dart';
@@ -28,7 +30,19 @@ class _AddCashScreenState extends State<AddCashScreen> {
   TextEditingController _remark = TextEditingController();
   TextEditingController _search = TextEditingController();
   var totalCash = 0;
-List<CashInOut>? searchDisplayList=[];
+  List<CashInOut>? searchDisplayList = [];
+
+  @override
+  void initState() {
+    gggg();
+    super.initState();
+  }
+
+  gggg() async {
+    final isLoggedIn = await SharedPreferenceHelper.isLoggedIn;
+    print(isLoggedIn);
+  }
+
   @override
   Widget build(BuildContext context) {
     // totalCash = 0;
@@ -57,13 +71,15 @@ List<CashInOut>? searchDisplayList=[];
                         shrinkWrap: true,
                         physics: BouncingScrollPhysics(),
                         reverse: true,
-                        itemCount:
-                        _search.text.length>0?widget.provider?.cashList.length:
-                        widget
-                            .provider?.savingList[widget.index].cashInOut?.length,
+                        itemCount: _search.text.length > 0
+                            ? widget.provider?.cashList.length
+                            : widget.provider?.savingList[widget.index]
+                                .cashInOut?.length,
                         itemBuilder: (context, i) {
-                          var data =_search.text.length>0?widget.provider?.cashList[i]: widget
-                              .provider?.savingList[widget.index].cashInOut?[i];
+                          var data = _search.text.length > 0
+                              ? widget.provider?.cashList[i]
+                              : widget.provider?.savingList[widget.index]
+                                  .cashInOut?[i];
                           return cashListWidget(data!);
                         })
                     // ...?widget.provider?.savingList[widget.index].cashInOut
@@ -94,7 +110,7 @@ List<CashInOut>? searchDisplayList=[];
         borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
-        children:  [
+        children: [
           Icon(Icons.search),
           SizedBox(
             width: 10,
@@ -103,17 +119,15 @@ List<CashInOut>? searchDisplayList=[];
               width: 250,
               child: TextField(
                 controller: _search,
-                onChanged: (value){
+                onChanged: (value) {
                   setState(() {
-                    widget.provider?.onSearchTextChanged(value,widget.index);
-
+                    widget.provider?.onSearchTextChanged(value, widget.index);
                   });
                 },
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                 ),
-
                 decoration: InputDecoration(
                   hintText: "Search By Remark..",
                   border: InputBorder.none,
@@ -122,23 +136,6 @@ List<CashInOut>? searchDisplayList=[];
         ],
       ),
     );
-  }
-  onSearchTextChanged(String text) {
-    searchDisplayList?.clear();
-    if (text.isEmpty) {
-      setState(() {});
-      return;
-    }
-    widget.provider?.savingList[widget.index].cashInOut?.forEach((userDetail) {
-      if (userDetail.remark
-          .toString()
-          .toLowerCase()
-          .contains(text.toLowerCase())) {
-        searchDisplayList?.add(userDetail);
-      }
-    });
-
-    setState(() {});
   }
 
   Widget cashAddSubWidget(
@@ -293,7 +290,8 @@ List<CashInOut>? searchDisplayList=[];
                 text("Total In(+)", size: 16, fontWeight: FontWeight.w500),
                 text("${widget.response?.totalBalanceIn ?? 0}",
                     colors: Colors.green.shade500,
-                    size: 16, fontWeight: FontWeight.w500),
+                    size: 16,
+                    fontWeight: FontWeight.w500),
               ],
             ),
           ),
@@ -305,20 +303,14 @@ List<CashInOut>? searchDisplayList=[];
                 text("Total Out (-)", size: 16, fontWeight: FontWeight.w500),
                 text("${widget.response?.totalBalanceOout ?? 0}",
                     colors: Colors.red.shade500,
-                    size: 16, fontWeight: FontWeight.w500),
+                    size: 16,
+                    fontWeight: FontWeight.w500),
               ],
             ),
           ),
         ],
       ),
     );
-  }
-
-  String getDisplayTime(String serverTime, String displayFormat) {
-    DateTime dateTime = DateTime.parse(serverTime);
-    final format1 = DateFormat(displayFormat);
-    String displayTime = format1.format(dateTime.toLocal());
-    return displayTime;
   }
 
   Widget cashListWidget(CashInOut data) {
@@ -328,7 +320,7 @@ List<CashInOut>? searchDisplayList=[];
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: text(
-              "${getDisplayTime(data.createTime ?? DateTime.now().toString(), "dd MMM yyyy")}"),
+              "${AppDateTime().getDisplayTime(data.createTime ?? DateTime.now().toString(), "dd MMM yyyy")}"),
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
@@ -384,7 +376,7 @@ List<CashInOut>? searchDisplayList=[];
               ),
               VertivalSpace(8),
               text(
-                  "${"${getDisplayTime(data.createTime ?? DateTime.now().toString(), "hh:mm aa")}"}",
+                  "${"${AppDateTime().getDisplayTime(data.createTime ?? DateTime.now().toString(), "hh:mm aa")}"}",
                   size: 12,
                   colors: Colors.grey,
                   fontWeight: FontWeight.w300),
@@ -479,7 +471,7 @@ List<CashInOut>? searchDisplayList=[];
                           ),
                           HorizontalSpace(5),
                           Text(
-                            "${getDisplayTime(DateTime.now().toString(), "dd MMM yyyy")}",
+                            "${AppDateTime().getDisplayTime(DateTime.now().toString(), "dd MMM yyyy")}",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
@@ -498,7 +490,7 @@ List<CashInOut>? searchDisplayList=[];
                           ),
                           HorizontalSpace(5),
                           Text(
-                            "${getDisplayTime(DateTime.now().toString(), "hh:mm aa")}",
+                            "${AppDateTime().getDisplayTime(DateTime.now().toString(), "hh:mm aa")}",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16),
                           ),
