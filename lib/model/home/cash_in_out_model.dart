@@ -16,8 +16,9 @@ class CashManage {
     this.totalBalanceIn,
     this.totalBalanceOout,
     this.cashInOut,
+    this.createdTimeStamp
   });
-
+String? createdTimeStamp;
   String? savingTitle;
   String? savingSubTitle;
   int? totalBalance;
@@ -32,6 +33,7 @@ class CashManage {
     totalBalanceIn: json["totalBalanceIn"],
     totalBalanceOout: json["totalBalanceOout"],
     cashInOut: List<CashInOut>.from(json["cashInOut"].map((x) => CashInOut.fromJson(x))),
+    createdTimeStamp: json["createdTimeStamp"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -41,11 +43,12 @@ class CashManage {
     "totalBalanceIn": totalBalanceIn,
     "totalBalanceOout": totalBalanceOout,
     "cashInOut": List<dynamic>.from(cashInOut!.map((x) => x.toJson())),
+    "createdTimeStamp": createdTimeStamp,
   };
 
   @override
   String toString() {
-    return 'CashManage{savingTitle: $savingTitle, savingSubTitle: $savingSubTitle, totalBalance: $totalBalance, totalBalanceIn: $totalBalanceIn, totalBalanceOout: $totalBalanceOout, cashInOut: $cashInOut}';
+    return 'CashManage{createdTimeStamp: $createdTimeStamp, savingTitle: $savingTitle, savingSubTitle: $savingSubTitle, totalBalance: $totalBalance, totalBalanceIn: $totalBalanceIn, totalBalanceOout: $totalBalanceOout, cashInOut: $cashInOut}';
   }
 }
 

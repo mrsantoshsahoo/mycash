@@ -6,6 +6,7 @@ class FieldConstants {
   static const data = 'data';
 
   //saving fields
+  static const createdTimeStamp = 'createdTimeStamp';
   static const savingTitle = 'savingTitle';
   static const savingSubTitle = 'savingSubTitle';
   static const totalBalance = 'totalBalance';

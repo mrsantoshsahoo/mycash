@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mycash/utils/app_time_converter.dart';
 import 'package:mycash/view/home/add_cash_screen.dart';
 import 'package:provider/provider.dart';
 import '../../app_helper/app_widgets/app_search_screen.dart';
 import '../../model/home/cash_in_out_model.dart';
 import '../../model/home/new_saving_model.dart';
+import '../../utils/widget_style.dart';
 import '../../view_model/home_main_view_model.dart';
 import '../../utils/extension_helper.dart';
 
@@ -13,10 +15,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var prov = Provider.of<HomeViewModel>(context,listen: true);
+    var prov = Provider.of<HomeViewModel>(context, listen: true);
+
     return ChangeNotifierProvider<HomeViewModel>(
         create: (context) => HomeViewModel(),
         child: Consumer<HomeViewModel>(builder: (context, counter, child) {
+          counter.callSaving();
           return Scaffold(
             resizeToAvoidBottomInset: true,
             appBar: AppBar(
@@ -42,6 +46,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 searchWidget(context),
                 ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     itemCount: counter.savingList.length,
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
@@ -67,13 +72,35 @@ class HomeScreen extends StatelessWidget {
                                     ""),
                                 Row(
                                   children: [
-                                    Text("5000"),
-                                    Icon(Icons.more_vert_outlined)
+                                    Text(""),
+                                    Icon(Icons.more_vert_outlined).onTap(() {
+                                      showMenu(
+                                          context: context,
+                                          position: RelativeRect.fromLTRB(
+                                              25.0, 0.0, 0.0, 0.0),
+                                          items: [
+                                            PopupMenuItem<int>(
+                                              value: 0,
+                                              child: TextButton.icon(
+                                                  onPressed: () {
+                                                    counter.deleteSaving(counter
+                                                        .savingList[index]
+                                                        .createdTimeStamp);
+                                                  },
+                                                  icon: Icon(Icons.delete),
+                                                  label: text("Delete")),
+                                            ),
+                                          ]);
+
+                                      // counter.deleteSaving(counter
+                                      //       .savingList[index]
+                                      //       .createdTimeStamp);
+                                    })
                                   ],
                                 ),
                               ],
                             ),
-                            subtitle: Text("My Salary"),
+                            subtitle: Text(counter.savingList[index].savingSubTitle ?? ""),
                             //   trailing: Icon(Icons.more_vert_outlined),
                           ),
                           const Divider(
@@ -205,7 +232,9 @@ class HomeScreen extends StatelessWidget {
                     CashManage _data = CashManage();
                     _data.savingTitle = _savingTitle.text;
                     _data.cashInOut?.add(CashInOut(balanceIn: 100));
-                    counter.addSaving( _data);
+                    _data.createdTimeStamp =
+                        AppDateTime().getServerTime(DateTime.now());
+                    counter.addSaving(_data);
                     _savingTitle.clear();
                     Navigator.pop(context);
                   },

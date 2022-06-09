@@ -32,16 +32,6 @@ class _AddCashScreenState extends State<AddCashScreen> {
   var totalCash = 0;
   List<CashInOut>? searchDisplayList = [];
 
-  @override
-  void initState() {
-    gggg();
-    super.initState();
-  }
-
-  gggg() async {
-    final isLoggedIn = await SharedPreferenceHelper.isLoggedIn;
-    print(isLoggedIn);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -636,7 +626,6 @@ class _AddCashScreenState extends State<AddCashScreen> {
                           0;
                       cash.remark = _remark.text;
                       widget.provider?.addCash(cash, widget.index);
-
                       //   widget.provider?.savingList[widget.index].totalBalance + int.parse(_cash.text) ;
                       _cash.clear();
                       _remark.clear();

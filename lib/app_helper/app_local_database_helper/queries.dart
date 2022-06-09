@@ -11,16 +11,25 @@ class Queries {
   // )
   // ''';
   //
+  //llllllllllllll
+  // static const CREATE_CUISINE_TABLE = '''
+  // CREATE TABLE ${NameConstants.SAVING_TABLE}(
+  // ${FieldConstants.id} ${DataType.textType},
+  // ${FieldConstants.savingTitle} ${DataType.textType},
+  // ${FieldConstants.savingSubTitle} ${DataType.textType},
+  // ${FieldConstants.totalBalance} ${DataType.integerType},
+  // ${FieldConstants.totalBalanceIn} ${DataType.integerType},
+  // ${FieldConstants.totalBalanceOout} ${DataType.integerType},
+  // ${FieldConstants.cashInOut} ${DataType.textType}
+  // )
+  // ''';
+
+
   static const CREATE_CUISINE_TABLE = '''
-  CREATE TABLE ${NameConstants.SAVING_TABLE}(
-  ${FieldConstants.id} ${DataType.textType},
-  ${FieldConstants.savingTitle} ${DataType.textType},
-  ${FieldConstants.savingSubTitle} ${DataType.textType},
-  ${FieldConstants.totalBalance} ${DataType.integerType}, 
-  ${FieldConstants.totalBalanceIn} ${DataType.integerType}, 
-  ${FieldConstants.totalBalanceOout} ${DataType.integerType},
-  ${FieldConstants.cashInOut} ${DataType.textType}
-  )
+   CREATE TABLE ${NameConstants.SAVING_TABLE} (
+   ${FieldConstants.createdTimeStamp} ${DataType.textType} NOT NULL UNIQUE,
+   ${FieldConstants.data} ${DataType.textType}
+   )
   ''';
 //
 // static const CREATE_MENU_ITEM_TABLE = '''
