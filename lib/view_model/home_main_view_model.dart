@@ -34,7 +34,6 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
   void callSaving() async {
-
     _savingList = await _orderLocalStore.fetchOrders();
     notifyListeners();
   }

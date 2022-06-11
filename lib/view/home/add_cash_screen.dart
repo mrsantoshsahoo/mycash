@@ -278,7 +278,7 @@ class _AddCashScreenState extends State<AddCashScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 text("Total In(+)", size: 16, fontWeight: FontWeight.w500),
-                text("${widget.response?.totalBalanceIn ?? 0}",
+                text("${widget.provider?.savingList[widget.index].totalBalanceIn ?? 0}",
                     colors: Colors.green.shade500,
                     size: 16,
                     fontWeight: FontWeight.w500),
@@ -291,7 +291,7 @@ class _AddCashScreenState extends State<AddCashScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 text("Total Out (-)", size: 16, fontWeight: FontWeight.w500),
-                text("${widget.response?.totalBalanceOout ?? 0}",
+                text("${widget.provider?.savingList[widget.index].totalBalanceOout ?? 0}",
                     colors: Colors.red.shade500,
                     size: 16,
                     fontWeight: FontWeight.w500),
@@ -625,7 +625,7 @@ class _AddCashScreenState extends State<AddCashScreen> {
                               ?.savingList[widget.index].totalBalance ??
                           0;
                       cash.remark = _remark.text;
-                      widget.provider?.addCash(cash, widget.index);
+                     widget.provider?.addCash(cash, widget.index);
                       //   widget.provider?.savingList[widget.index].totalBalance + int.parse(_cash.text) ;
                       _cash.clear();
                       _remark.clear();
